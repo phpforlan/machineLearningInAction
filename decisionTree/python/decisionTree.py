@@ -33,7 +33,7 @@ def createDataSet():
 
 def calcShannonEntropy(dataSet):
     """
-        计算给定数据集的香农熵
+        计算给定数据集的香农熵(也就是label的信息熵)
         Args:
             dataSet: 数据集
         Returns:
@@ -92,9 +92,39 @@ def splitDataSet(dataSet, index, value):
     return retDataSet
 
 
+def chooseBestFeatureToSplit(dataSet):
+    """
+        选择最好的特征进行切分
+        Args:
+            dataSet 数据集
+        Returns:
+          bestFeature 最优的特征列
+    """
+    # 求第一行有多少列的 Feature, 最后一列是label列嘛
+    numFeatures = len(dataSet[0]) - 1
+
+    # label的信息熵(即数据集的香农熵)
+    baseEntropy = calcShannonEntropy(dataSet)
+
+    # 最优的信息增益值, 和最优的Featurn编号
+    bestInfoGain, bestFeature = 0.0, -1
+
+    for i in range(numFeatures):
+        featList = [example[i] for example in dataSet]
+
+        print(featList)
+
+
+
+
+    return
 
 dataSet, labels = createDataSet()
 #shannonEntropy = calcShannonEntropy(dataSet)
-retDataSet = splitDataSet(dataSet,0,1)
-print(retDataSet)
+#retDataSet = splitDataSet(dataSet,0,1)
+#print(retDataSet)
+
+chooseBestFeatureToSplit(dataSet)
+
+
 
