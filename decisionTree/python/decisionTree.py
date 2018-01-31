@@ -100,7 +100,7 @@ def chooseBestFeatureToSplit(dataSet):
         Returns:
           bestFeature 最优的特征列
     """
-    # 求第一行有多少列的 Feature, 最后一列是label列嘛(总特征数)
+    # 求数据集的总特征数
     numFeatures = len(dataSet[0]) - 1
 
     # label的信息熵(即数据集的香农熵)
@@ -113,20 +113,13 @@ def chooseBestFeatureToSplit(dataSet):
 
         featList = []
         for example in dataSet:
+
             featList.append(example[i])
-            uniqueVals = set(featList)
+            uniqueVals = set(featList) #获取某一列的所有特征
 
-            newEntropy = 0.0 #创建一个临时的信息熵
-            for value in uniqueVals:
-                subDataSet = splitDataSet(dataSet, i, value)
-                prob = len(subDataSet) / float(len(dataSet))
-                newEntropy += prob * calcShannonEntropy(subDataSet)
 
-            infoGain = baseEntropy - newEntropy
-            if(infoGain > baseEntropy):
-                bestInfoGain = infoGain
-                bestFeature = i
-
+        print(uniqueVals)
+        exit()
     return bestFeature
 
 
