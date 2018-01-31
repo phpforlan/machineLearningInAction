@@ -124,7 +124,7 @@ def chooseBestFeatureToSplit(dataSet):
             for value in uniqueVals:
                 subDataSet = splitDataSet(dataSet, i, value)
                 prob = len(subDataSet) / float(len(dataSet))
-                newEntropy += prob * calcShannonEntropy(subDataSet)
+                newEntropy += prob * calcShannonEntropy(subDataSet) #条件熵
 
             infoGain = baseEntropy - newEntropy
             if(infoGain > bestInfoGain):
@@ -133,13 +133,27 @@ def chooseBestFeatureToSplit(dataSet):
 
     return bestFeature
 
+
+def majorityCnt(classList):
+    """
+    选择出现次数最多的一个结果
+    Args:
+        classList label列的集合
+    Returns:
+        bestFeature 最优的特征列
+    """
+
+    return
+
 dataSet, labels = createDataSet()
 #shannonEntropy = calcShannonEntropy(dataSet)
 #retDataSet = splitDataSet(dataSet,0,1)
 #print(retDataSet)
 
-bestFeature = chooseBestFeatureToSplit(dataSet)
+#bestFeature = chooseBestFeatureToSplit(dataSet)
+#print(bestFeature)
 
+bestFeature = majorityCnt(dataSet)
 print(bestFeature)
 
 
