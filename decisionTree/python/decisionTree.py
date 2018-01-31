@@ -100,28 +100,38 @@ def chooseBestFeatureToSplit(dataSet):
         Returns:
           bestFeature 最优的特征列
     """
-    # 求数据集的总特征数
+    # 求数据集的总特征数(每列就是一个特征)
     numFeatures = len(dataSet[0]) - 1
 
     # label的信息熵(即数据集的香农熵)
     baseEntropy = calcShannonEntropy(dataSet)
 
-    # 最优的信息增益值, 和最优的Featurn编号
+    # 最优的信息增益值, 和最优的feature编号
     bestInfoGain, bestFeature = 0.0, -1
 
     for i in range(numFeatures):
 
-        featList = []
+        featvalueList = [] #存储某个特征的所有取值
         for example in dataSet:
 
-            featList.append(example[i])
-            uniqueVals = set(featList) #获取某一列的所有特征
+            featvalueList.append(example[i])
+            uniqueVals = set(featvalueList) #获取某一列特征的所有特征取值
 
+            # 创建一个临时信息熵
+            newEntropy = 0.0
 
-        print(uniqueVals)
-        exit()
+            # 遍历某一列的value集合，计算该列的信息熵
+            for value in uniqueVals:
+                subDataSet = splitDataSet(dataSet, i, value)
+                prob = len(subDataSet) / float(len(dataSet))
+                newEntropy += prob * calcShannonEntropy(subDataSet)
+
+            infoGain = baseEntropy - newEntropy
+            if(infoGain > bestInfoGain):
+                bestInfoGain = infoGain
+                bestFeature = i
+
     return bestFeature
-
 
 dataSet, labels = createDataSet()
 #shannonEntropy = calcShannonEntropy(dataSet)
