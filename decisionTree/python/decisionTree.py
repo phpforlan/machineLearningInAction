@@ -136,14 +136,22 @@ def chooseBestFeatureToSplit(dataSet):
 
 def majorityCnt(classList):
     """
-    选择出现次数最多的一个结果
+    在指定list中,选择出现次数最多的一个结果
     Args:
         classList label列的集合
     Returns:
         bestFeature 最优的特征列
     """
 
-    return
+    classCount = {}
+    for vote in classList:
+        if vote not in classCount.keys():
+            classCount[vote] = 0
+        classCount[vote] += 1
+
+    sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
+
+    return sortedClassCount[0][0]
 
 dataSet, labels = createDataSet()
 #shannonEntropy = calcShannonEntropy(dataSet)
@@ -153,7 +161,7 @@ dataSet, labels = createDataSet()
 #bestFeature = chooseBestFeatureToSplit(dataSet)
 #print(bestFeature)
 
-bestFeature = majorityCnt(dataSet)
+bestFeature = majorityCnt(['yes', 'no', 'yes'])
 print(bestFeature)
 
 
