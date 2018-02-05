@@ -9,6 +9,8 @@ import operator
 from math import log
 
 def createTree(dataSet, labels):
+
+    #取出所有的label
     classList = [example[-1] for example in dataSet]
 
     if classList.count(classList[0]) == len(classList):
@@ -20,6 +22,11 @@ def createTree(dataSet, labels):
 
     # 选择最优的列，得到最优列对应的label含义
     bestFeat = chooseBestFeatureToSplit(dataSet)
+
+    print(bestFeat)
+
+    exit()
+
     # 获取label的名称
     bestFeatLabel = labels[bestFeat]
     # 初始化myTree
@@ -78,11 +85,10 @@ def chooseBestFeatureToSplit(dataSet):
 
     for i in range(numFeatures):
 
-        featvalueList = [] #存储某个特征的所有取值
         for example in dataSet:
 
-            featvalueList.append(example[i])
-            uniqueVals = set(featvalueList) #获取某一列特征的所有特征取值
+            featList = [example[i] for example in dataSet] #获取某一列特征的所有特征取值
+            uniqueVals = set(featList)
 
             # 创建一个临时信息熵
             newEntropy = 0.0
