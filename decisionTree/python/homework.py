@@ -23,12 +23,9 @@ def createTree(dataSet, labels):
     # 选择最优的列，得到最优列对应的label含义
     bestFeat = chooseBestFeatureToSplit(dataSet)
 
-    print(bestFeat)
-
-    exit()
-
     # 获取label的名称
     bestFeatLabel = labels[bestFeat]
+
     # 初始化myTree
     myTree = {bestFeatLabel: {}}
     # 注：labels列表是可变对象，在PYTHON函数中作为参数时传址引用，能够被全局修改
@@ -178,12 +175,12 @@ def homeWorkClassTest():
     trainingData = [inst.strip().split(',') for inst in f.readlines()]
     testingData = [inst.strip().split(',') for inst in t.readlines()]
 
-    labels = ['unacc', 'acc', 'good', 'vgood']
+    labels = ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety']
 
     #生成树
     vehicleTree = createTree(trainingData, labels)
 
-    print(vehicleTree)
+
 
     return
 
