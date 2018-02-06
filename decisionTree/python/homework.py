@@ -180,6 +180,29 @@ def storeTree(inputTree, filename):
     # -------------- 第二种方法 start --------------
 
 
+def grabTree(filename):
+    import pickle
+    fr = open(filename)
+    return pickle.load(fr)
+
+
+def classify(inputTree, featLabels, testVec):
+    # 获取tree的根节点对于的key值
+    firstStr = inputTree.keys()[0]
+    # 通过key得到根节点对应的value
+    secondDict = inputTree[firstStr]
+    # 判断根节点名称获取根节点在label中的先后顺序，这样就知道输入的testVec怎么开始对照树来做分类
+    featIndex = featLabels.index(firstStr)
+    # 测试数据，找到根节点对应的label位置，也就知道从输入的数据的第几位来开始分类
+    key = testVec[featIndex]
+    valueOfFeat = secondDict[key]
+    #print '+++', firstStr, 'xxx', secondDict, '---', key, '>>>', valueOfFeat
+    # 判断分枝是否结束: 判断valueOfFeat是否是dict类型
+    if isinstance(valueOfFeat, dict):
+        classLabel = classify(valueOfFeat, featLabels, testVec)
+    else:
+        classLabel = valueOfFeat
+    return classLabel
 
 def homeWorkClassTest():
     trainingFile = '../data/training.data'
@@ -189,16 +212,20 @@ def homeWorkClassTest():
     t = open(testFile)
 
     trainingData = [inst.strip().split(',') for inst in f.readlines()]
-    testingData = [inst.strip().split(',') for inst in t.readlines()]
+    testData = [inst.strip().split(',') for inst in t.readlines()]
 
     labels = ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety']
 
     #生成树
     vehicleTree = createTree(trainingData, labels)
-
     storeTree(vehicleTree, 'vehicleTree.tree')
 
-    return
+    testDataLen = len(testData)
+
+    for i in range(testDataLen):
+        res = classify(grabTree('vehicleTree.tree'), ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety'],
+                       testData[i])
+        print(res)
 
 if __name__ == '__main__':
     homeWorkClassTest()
