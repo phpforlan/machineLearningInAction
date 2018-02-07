@@ -7,6 +7,7 @@
 
 import operator
 from math import log
+import random
 
 def createTree(dataSet, labels):
 
@@ -204,6 +205,18 @@ def classify(inputTree, featLabels, testVec):
         classLabel = valueOfFeat
     return classLabel
 
+
+def list2file(lists):
+    txtName = "./result"
+    f = file(txtName, "a+")
+    writeFile = ''
+    for item in lists:
+        for i in item:
+            writeFile = writeFile + str((i)) + ','
+        writeFile = writeFile.strip(',') + '\n'
+    f.write(writeFile)
+    f.close()
+
 def homeWorkClassTest():
     trainingFile = '../data/training.data'
     testFile = '../data/test.data'
@@ -222,10 +235,19 @@ def homeWorkClassTest():
 
     testDataLen = len(testData)
 
+    resArr = ['unacc', 'acc', 'good', 'vgood']
     for i in range(testDataLen):
-        res = classify(grabTree('vehicleTree.tree'), ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety'],
+        try:
+            res = classify(grabTree('vehicleTree.tree'), ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety'],
                        testData[i])
-        print(res)
+        except:
+            randIndex = random.randint(0, len(resArr)-1)
+            res = resArr[randIndex]
+
+        testData[i].append(res)
+
+    list2file(testData)
+
 
 if __name__ == '__main__':
     homeWorkClassTest()
