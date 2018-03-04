@@ -23,9 +23,9 @@ P(A|B) = ( P(B|A)P(A) ) / P(B)
 
 解释: P(A|B)表示在事件B已经发生的条件下，事件A发生的概率。
 
-### 贝叶斯定理推断过程: http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_one.html
-### 条件概念百度百科: https://baike.baidu.com/item/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/4475278?fr=aladdin
-### 朴素贝叶斯分类器的应用: http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html
+1. 贝叶斯定理推断过程: http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_one.html
+2. 条件概念百度百科: https://baike.baidu.com/item/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/4475278?fr=aladdin
+3. 朴素贝叶斯分类器的应用: http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html
 
 案例一、贝叶斯定理病人分类的例子:
 ```
