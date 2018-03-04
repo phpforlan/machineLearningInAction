@@ -6,7 +6,6 @@
 朴素贝叶斯分类器的基本方法: 在统计资料的基础上，依据某些特征(假设特征之间是相互独立的)，计算各个类别的概率，从而实现分类。
 
 # 一、什么是贝叶斯理论
-
 1. 频率派观念
 事情发生的频率是一定的（虽然可能算不出来，但是是确定的一个值），然而，样本空间却是是不确定的，因此只需要关键样本分布即可。
 
@@ -24,12 +23,13 @@ P(A|B) = ( P(B|A)P(A) ) / P(B)
 
 解释: P(A|B)表示在事件B已经发生的条件下，事件A发生的概率。
 
-贝叶斯定理推断过程: http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_one.html
-条件概念百度百科: https://baike.baidu.com/item/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/4475278?fr=aladdin
-朴素贝叶斯分类器的应用: http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html
+> 贝叶斯定理推断过程: http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_one.html
+> 条件概念百度百科: https://baike.baidu.com/item/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87/4475278?fr=aladdin
+> 朴素贝叶斯分类器的应用: http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html
 
 案例一、贝叶斯定理病人分类的例子:
-症状　　职业　　　疾病
+```
+    症状　　职业　　　疾病
 
 　　打喷嚏　护士　　　感冒
 　　打喷嚏　农夫　　　过敏
@@ -37,6 +37,7 @@ P(A|B) = ( P(B|A)P(A) ) / P(B)
 　　头痛　　建筑工人　感冒
 　　打喷嚏　教师　　　感冒
 　　头痛　　教师　　　脑震荡
+```
 
 问题: 现在又来了第七个病人，是一个打喷嚏的建筑工人。请问他患上感冒的概率有多大？
 B => 打喷嚏x建筑工人(条件)
