@@ -61,14 +61,15 @@ class MysqlSearch(object):
             )
             cursor = self.conn.cursor()
             cursor.execute(sql, ('标题9', '/static/img/news/01.png', '新闻内容', '推荐', 1))
-            cursor.execute(sql, ('标题10', '/static/img/news/01.png', '新闻内容', '推荐', '你好'))
+            cursor.execute(sql, ('标题10', '/static/img/news/01.png', '新闻内容', '推荐', 1))
             self.conn.commit()
-        except:
-            print('error')
+        except MySQLdb.Error as e:
+            print('error: %s' % e)
             print(self.conn)
         finally:
-            self.conn.close()
             cursor.close()
+            self.conn.close()
+
 
 def main():
     obj = MysqlSearch()
