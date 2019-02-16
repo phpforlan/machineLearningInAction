@@ -41,6 +41,15 @@ class News(Base):
             self.created_at)
 
 
-engine = create_engine('mysql://root:123456@127.0.0.1:3306/news', echo=True)
+engine = create_engine('mysql://root:123456@127.0.0.1:3306/news_test', echo=True)
+Session = sessionmaker(bind=engine)
+session = Session()
 
-print(engine)
+#新增一条数据
+news_obj = News(title="程序标题", content="程序内容", types="程序类型", image="/static/1.jpg", author="程序作者",
+                view_count=103, is_valid=1, created_at = "2018-12-24 13:20:00")
+Session.add(news_obj)
+
+
+
+
